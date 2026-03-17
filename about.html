@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | Wendy's Garden</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/* ===== GLOBAL ===== */
+:root {
+    --primary-dark: #1b302251;
+    --accent-lime: #a8e063;
+    --soft-white: #f4f7f4;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Playfair Display', serif; background-color: var(--soft-white); color: var(--primary-dark); line-height:1.6; }
+
+/* ===== NAVBAR ===== */
+.navbar {
+    position: fixed; top:0; width:100%; display:flex; justify-content:space-between; align-items:center;
+    padding:25px 5%; background-color: var(--primary-dark); z-index:1000; transition: all 0.4s ease;
+}
+.navbar.scrolled { background-color:#111f16; padding:15px 5%; box-shadow:0 5px 20px rgba(0,0,0,0.4); }
+.logo { font-family:'Playfair Display'; font-size:1.8rem; color:#fff; font-weight:700; }
+.nav-links { display:flex; list-style:none; gap:30px; }
+.nav-links a { color:#fff; text-decoration:none; font-weight:600; font-size:0.85rem; text-transform:uppercase; letter-spacing:1.5px; position:relative; transition:0.3s; }
+.nav-links a::after { content:''; position:absolute; width:0; height:2px; bottom:-5px; left:0; background-color: var(--accent-lime); transition:0.3s; }
+.navbar:not(.scrolled) .nav-links a:hover::after, .navbar:not(.scrolled) .nav-links a.active-page::after { width:100%; }
+.navbar.scrolled .nav-links a::after { display:none !important; }
+.nav-links a:hover, .nav-links a.active-page { color: var(--accent-lime); }
+
+/* ===== HERO ===== */
+.about-header {
+    position: relative; height:90vh; display:flex; justify-content:center; align-items:center; text-align:center; color:#fff;
+}
+.about-header::before {
+    content:''; position:absolute; top:0; left:0; width:100%; height:100%; z-index:0;
+    background:
+        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+        url('img/daisy.webp') center/cover no-repeat;
+    animation: kenBurns 20s infinite alternate;
+}
+.about-header .hero-content { position:relative; z-index:2; padding-top:40px; }
+.about-header h1.reveal, .about-header p.reveal {
+    opacity:0; transform:translateY(30px) scale(0.9); transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.about-header h1.reveal.active, .about-header p.reveal.active { opacity:1; transform:translateY(0) scale(1); }
+
+/* Hero animation */
+@keyframes kenBurns { from{transform:scale(1);} to{transform:scale(1.1);} }
+
+/* ===== STORY GRID ===== */
+.container { max-width:1200px; margin:0 auto; padding:100px 5% 60px 5%; }
+.story-grid { display:grid; grid-template-columns:1fr 1.2fr; gap:80px; align-items:center; }
+.story-image img { width:100%; border-radius:20px; transition:transform 0.6s ease; }
+
+/* ===== MISSION & VISION ===== */
+.mission-vision { padding:80px 10%; background:#f8fbf9; text-align:center; }
+.mv-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:40px; align-items:start; }
+.mv-card { background:#fff; padding:30px 25px; border-radius:20px; box-shadow:0 10px 25px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.mv-card:hover { transform: translateY(-10px) scale(1.02); box-shadow:0 15px 35px rgba(0,0,0,0.1); }
+.mv-card .section-title { font-family:'Playfair Display'; font-size:1.6rem; margin-bottom:20px; color:#2e4d3b; }
+.mv-card p, .mv-card li { font-size:0.95rem; line-height:1.6; color:#555; }
+
+/* ===== FOOTER ===== */
+.site-footer { background:#2e4d3bdc; color:#fff; padding:60px 10%; }
+.footer-container { display:flex; flex-wrap:wrap; justify-content:space-between; gap:40px; }
+.footer-brand h2 { font-family:'Playfair Display'; font-size:1.8rem; margin-bottom:10px; }
+.footer-brand p { font-size:0.95rem; line-height:1.6; color:#dcdcdc; }
+.footer-contact a, .footer-social a { color:#dcdcdc; text-decoration:none; transition:0.3s; }
+.footer-contact a:hover, .footer-social a:hover { color:#27ae60; }
+.footer-bottom { text-align:center; margin-top:40px; border-top:1px solid rgba(255,255,255,0.2); padding-top:20px; font-size:0.9rem; color:#dcdcdc; }
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){ .story-grid{grid-template-columns:1fr;} .nav-links{display:none;} }
+@media(max-width:768px){ .mission-vision{padding:50px 5%;} .mv-card .section-title{font-size:1.4rem;} }
+</style>
+</head>
+<body class="about-page">
+
+<nav class="navbar">
+    <div class="logo">Wendy's Garden 🌿</div>
+    <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html" class="active-page">About</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="care.html">Care Tips</a></li>
+    </ul>
+</nav>
+
+<header class="about-header">
+    <div class="hero-content">
+        <h1 class="reveal about-title">Our Roots</h1>
+        <p class="reveal about-sub">Growing a greener world, one leaf at a time.</p>
+    </div>
+</header>
+
+<section class="container">
+    <div class="story-grid">
+        <div class="story-image">
+            <img src="img/wendy.png" alt="Garden Life">
+        </div>
+        <div class="story-text">
+            <h2 class="section-title" style="text-align:left;">Our Story</h2>
+            <p>Wendy’s Garden began with a simple belief: that everyone deserves a piece of nature’s soul. What started as a small personal collection of rare monsteras in a sunlit corner has blossomed into a community for plant parents.</p>
+            <p>We don't just sell plants; we share the patience, care, and quiet joy that comes with watching a new leaf uncurl. Our journey is defined by the dirt on our hands and the green in our hearts.</p>
+        </div>
+    </div>
+</section>
+
+<section class="mission-vision">
+    <div class="mv-grid">
+        <div class="mv-card">
+            <h2 class="section-title">Our Mission</h2>
+            <p>Wendy’s Garden is dedicated to achieving its vision through the following:</p>
+            <ul>
+                <li>To cultivate and preserve a wide variety of ornamental plants, flowers, and greenery that showcase the richness of nature;</li>
+                <li>To promote environmental awareness and sustainable gardening practices among community members and visitors;</li>
+            </ul>
+        </div>
+        <div class="mv-card">
+            <h2 class="section-title">Our Vision</h2>
+            <p>Wendy’s Garden aspires to be a leading eco-friendly garden in the locality, recognized for its commitment to environmental sustainability, aesthetic excellence, and community engagement. It envisions becoming a center for learning and inspiration where individuals can develop a deeper appreciation for nature and responsible environmental stewardship.</p>
+        </div>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-brand">
+            <h2>Wendy's Garden 🌿</h2>
+            <p>Bringing Nature's Soul into Your Home. Curated greenery for every space.</p>
+        </div>
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <a href="https://www.facebook.com/analiza.viray.35" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a><br>
+            <a href="tel:+639912206240"><i class="fas fa-phone-alt"></i> (+63) 0991 220 6240</a>
+        </div>
+        <div class="footer-social">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Wendy's Garden. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+// ===== Hero text reveal on load =====
+window.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('.about-header h1.reveal').classList.add('active');
+    document.querySelector('.about-header p.reveal').classList.add('active');
+});
+
+// ===== Navbar shrink on scroll =====
+window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if(window.scrollY > 50) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,326 @@
+/* ==========================================================================
+   1. VARIABLES & RESET (ONLY ONCE)
+========================================================================== */
+:root {
+    --primary-dark: #1b3022;
+    --primary-leaf: #2d5a27;
+    --forest-solid: #111f16;
+    --accent-lime: #a8e063;
+    --soft-white: #f4f7f4;
+
+    --transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    --shadow-sm: 0 10px 25px rgba(0,0,0,0.05);
+    --shadow-lg: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f8fbf9;
+    color: var(--primary-dark);
+    overflow-x: hidden;
+}
+
+/* Media */
+img, video {
+    max-width: 100%;
+    display: block;
+}
+
+/* ==========================================================================
+   2. NAVIGATION (ONE VERSION ONLY)
+========================================================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 80px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 6%;
+    z-index: 1000;
+
+    background: transparent;
+    transition: var(--transition);
+}
+
+/* Scroll Effect */
+.navbar.scrolled {
+    background: rgba(17, 31, 22, 0.95);
+    backdrop-filter: blur(10px);
+    height: 70px;
+    box-shadow: var(--shadow-lg);
+}
+
+/* Logo */
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+/* Links */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    padding: 10px 0;
+}
+
+/* Hover + Active */
+.nav-links a:hover,
+.nav-links a.active-page {
+    color: var(--accent-lime);
+}
+
+/* Underline */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 2px;
+    background: var(--accent-lime);
+    transition: 0.3s;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active-page::after {
+    width: 100%;
+}
+
+/* ==========================================================================
+   3. HERO (UNIFIED)
+========================================================================== */
+.hero {
+    position: relative;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('img/daisy.webp') center/cover no-repeat;
+    filter: brightness(0.6);
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(50, 48, 48, 0.295);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+}
+
+/* ==========================================================================
+   4. PRODUCTS (MERGED SYSTEM)
+========================================================================== */
+.products-section {
+    padding: 80px 10%;
+    text-align: center;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+}
+
+/* Grid */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+/* Card */
+.product-card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Image */
+.product-card img {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Info */
+.product-info {
+    padding: 20px;
+    text-align: left;
+}
+
+.product-info h3 {
+    margin-bottom: 10px;
+}
+
+/* Buttons */
+.product-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+    background: #2e4d3b;
+    color: #fff;
+    padding: 60px 10%;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.footer-brand h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.footer-brand p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #dcdcdc;
+}
+
+.footer-links h3,
+.footer-social h3,
+.footer-contact h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+    text-decoration: none;
+    color: #dcdcdc;
+    font-size: 0.95rem;
+}
+
+.footer-links ul li a:hover {
+    color: #27ae60;
+}
+
+/* Contact Links */
+.footer-contact .facebook-link,
+.footer-contact .phone-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    text-decoration: none;
+    color: #dcdcdc;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.footer-contact .facebook-link i,
+.footer-contact .phone-link i {
+    font-size: 1.2rem;
+}
+
+.footer-contact .facebook-link:hover,
+.footer-contact .phone-link:hover {
+    color: #27ae60;
+}
+
+.footer-social .social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-social .social-icons a {
+    color: #dcdcdc;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.footer-social .social-icons a:hover {
+    color: #27ae60;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 20px;
+    font-size: 0.9rem;
+    color: #dcdcdc;
+}
+
+/* ===== RESPONSIVE FOOTER ===== */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .footer-links ul li,
+    .footer-contact .facebook-link,
+    .footer-contact .phone-link,
+    .footer-social .social-icons {
+        justify-content: center;
+        display: block;
+        margin-bottom: 8px;
+    }
+}

@@ -1,0 +1,406 @@
+/* ==========================================================================
+   1. GLOBAL RESET & VARIABLES
+   ========================================================================== */
+:root {
+    --primary-dark: #1b3022;
+    --accent-lime: #a8e063;
+    --soft-white: #f4f7f4;
+    --transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--soft-white);
+    font-family: 'Playfair Display', serif;
+    color: var(--primary-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   2. NAVIGATION BAR (Solid Forest Design)
+   ========================================================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 5%;
+    z-index: 1000;
+    background-color: var(--primary-dark); /* Solid Deep Forest */
+    border-bottom: 1px solid rgba(21, 19, 19, 0.05); /* Subtle line for depth */
+    transition: all 0.4s ease-in-out;
+}
+
+/* Compact version triggered by JS handleScroll() */
+.navbar.scrolled {
+    background-color: #111f16; /* Darker shade on scroll */
+    padding: 15px 5%; /* Shrinks on scroll */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    border-bottom: none; /* REMOVED: No more lime green line at bottom */
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #e3caca;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* --- Underline Logic --- */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--accent-lime);
+    transition: width 0.3s ease;
+}
+
+/* Show underline ONLY when NOT scrolled */
+.navbar:not(.scrolled) .nav-links a:hover::after,
+.navbar:not(.scrolled) .nav-links a.active-page::after {
+    width: 100%;
+}
+
+/* Hide underline completely when scrolled to match your screenshot request */
+.navbar.scrolled .nav-links a::after {
+    display: none !important; /* */
+}
+
+.nav-links a:hover,
+.nav-links a.active-page {
+    color: var(--accent-lime);
+}
+
+/* ==========================================================================
+   3. ANIMATION CONTROL & "STAY" LOGIC
+   ========================================================================== */
+.no-anim, 
+.no-anim body {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+.no-anim .reveal,
+.no-anim .scroll-reveal,
+.no-anim .about-header h1.reveal {
+    opacity: 1 !important;
+    transform: translateY(0) scale(1) !important;
+    letter-spacing: -2px !important; 
+    transition: none !important; 
+}
+
+/* ==========================================================================
+   4. HEADER & HERO
+   ========================================================================== */
+.about-header {
+    position: relative;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+}
+
+.about-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+
+    /* Image + dark overlay combined */
+    background: 
+        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), /* overlay */
+        url('img/daisy.webp') center/cover no-repeat;
+
+    animation: kenBurns 20s infinite alternate;
+} 
+.about-header .overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    background: linear-gradient(
+        135deg,
+        rgba(0, 20, 0, 0.75),
+        rgba(0, 0, 0, 0.85)
+    );
+
+    backdrop-filter: blur(3px);
+}
+@keyframes kenBurns {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+.about-header .hero-content {
+    position: relative;
+    z-index: 2;
+    padding-top: 40px;
+}
+
+.about-header h1.reveal {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 10vw, 7rem); 
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    line-height: 0.9;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+    letter-spacing: 20px; 
+    transition: all 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.about-header h1.reveal.active {
+    opacity: 1 !important;
+    transform: translateY(0) scale(1) !important;
+    letter-spacing: -2px;
+}
+
+/* ==========================================================================
+   5. CONTENT SECTIONS
+   ========================================================================== */
+.story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: center;
+    padding: 100px 5%;
+}
+
+.story-image img {
+    width: 100%;
+    border-radius: 20px;
+    transition: transform 0.6s ease-out;
+}
+
+.mv-section {
+    background: var(--primary-dark);
+    padding: 100px 5%;
+    color: white;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.scroll-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   6. RESPONSIVE
+   ========================================================================== */
+@media (max-width: 900px) {
+    .story-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+}
+/* ===== FOOTER ===== */
+.site-footer {
+    background: #2e4d3b;
+    color: #fff;
+    padding: 60px 10%;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.footer-brand h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.footer-brand p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #dcdcdc;
+}
+
+.footer-links h3,
+.footer-social h3,
+.footer-contact h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+    text-decoration: none;
+    color: #dcdcdc;
+    font-size: 0.95rem;
+}
+
+.footer-links ul li a:hover {
+    color: #27ae60;
+}
+
+/* Contact Links */
+.footer-contact .facebook-link,
+.footer-contact .phone-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    text-decoration: none;
+    color: #dcdcdc;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.footer-contact .facebook-link i,
+.footer-contact .phone-link i {
+    font-size: 1.2rem;
+}
+
+.footer-contact .facebook-link:hover,
+.footer-contact .phone-link:hover {
+    color: #27ae60;
+}
+
+.footer-social .social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-social .social-icons a {
+    color: #dcdcdc;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.footer-social .social-icons a:hover {
+    color: #27ae60;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 20px;
+    font-size: 0.9rem;
+    color: #dcdcdc;
+}
+
+/* ===== RESPONSIVE FOOTER ===== */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .footer-links ul li,
+    .footer-contact .facebook-link,
+    .footer-contact .phone-link,
+    .footer-social .social-icons {
+        justify-content: center;
+        display: block;
+        margin-bottom: 8px;
+    }
+}
+/* ===== MISSION & VISION ===== */
+.mission-vision {
+    padding: 80px 10%;
+    background: #f8fbf9;
+    text-align: center;
+}
+
+.mv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    align-items: start;
+}
+
+.mv-card {
+    background: #fff;
+    padding: 30px 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mv-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.mv-card .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    color: #2e4d3b;
+}
+
+.mv-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .mission-vision {
+        padding: 50px 5%;
+    }
+    .mv-card .section-title {
+        font-size: 1.4rem;
+    }
+}
